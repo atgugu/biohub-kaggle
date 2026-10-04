@@ -26,8 +26,8 @@ MILESTONES = {  # name -> label
 for mode, c in THEMES.items():
     fig, ax = plt.subplots(figsize=(10, 4.6), dpi=160)
     fig.patch.set_facecolor(c["bg"]); ax.set_facecolor(c["bg"])
-    ax.plot(df.n, df.public, color=c["pub"], lw=2, marker="o", ms=4.5, mec=c["bg"], mew=1.2, label="Public LB (29% of hidden set)")
-    ax.plot(df.n, df.private, color=c["priv"], lw=2, marker="o", ms=4.5, mec=c["bg"], mew=1.2, label="Private LB (final)")
+    ax.plot(df.n, df.public, color=c["pub"], lw=2, marker="o", ms=4.5, mec=c["bg"], mew=1.2, label="Public LB")
+    ax.plot(df.n, df.private, color=c["priv"], lw=2, marker="o", ms=4.5, mec=c["bg"], mew=1.2, label="Private LB")
     for name, label in MILESTONES.items():
         r = df[df["name"] == name].iloc[0]
         ax.annotate(label, (r.n, r.private), xytext=(0, {"X1h": -44, "X3e-tv": -40}.get(name, -34)), textcoords="offset points", ha="center",

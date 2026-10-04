@@ -73,7 +73,8 @@ p_keep = σ( logit(p_lgbm) + γ·triplet_logit ),   γ = 1,   remove the farther
 Every community weight was trained on the training videos, so a local score on them is in-sample and can
 mislead: flip-only test-time augmentation measured +0.0126 over the base's 8-view TTA on training videos, then
 scored *below* its base on the leaderboard (0.949 vs. 0.953) and on a held-out-embryo check. Three rules made the
-local numbers trustworthy:
+local numbers trustworthy (rules 1–2 held throughout; rule 3, the 195-video big test, was built on 27 Sep and
+gated the later candidates — the R-line, `X1h` and `X3d` were decided on smaller held-out sets):
 
 1. **Official metric only** — the host's scorer, per video, per embryo (`src/validation/score.py`).
 2. **By-video out-of-fold learning** — every learned component (rankers, DivNets, DaughterNet, TripletNet, veto)

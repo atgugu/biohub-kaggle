@@ -25,7 +25,7 @@ described in [SOLUTION.md](SOLUTION.md#3-validation).
 | Fork veto (LightGBM on fork geometry + honest DivNet) | +0.002 public / +0.002 private |
 | Candidate-attach with *linker evidence* features | the base linker's `p→c` logit separates real second daughters; in a linker stress test the attach kept ≈ 1/3 of its `6bba` gain with out-of-sample linker evidence and ≈ 0 without linker features |
 | DivNet v3 (finer xy pooling, jitter, hard negatives) | `X1h` → `X3d-t50`: +0.0028 public / +0.0054 private |
-| DaughterNet features | `X3d-t50` → `X3e-t50`: +0.0018 public / +0.0004 private; `X3e-t50` is +0.0078 / +0.0139 vs `X1h` on the big test |
+| DaughterNet features | `X3d-t50` → `X3e-t50`: +0.0018 public / +0.0004 private; on the earlier 48-video held-out test `X3e-t50` read +0.0078 / +0.0139 vs `X1h`; the 195-video big test gives `X3e` +0.0055 / +0.0094 |
 | TripletNet-aware veto | +0.0025 public, ≈ +0.0002 private; raises the safe veto threshold from 0.05 to 0.1 without losing `44b6` |
 
 ## Dead ends (each measured, none shipped)
@@ -50,8 +50,10 @@ described in [SOLUTION.md](SOLUTION.md#3-validation).
 
 ## Lessons
 
-1. **Distrust anything measured on videos the models were trained on.** The in-sample/out-of-sample brackets
-   caught flip-TTA, the fine-tuned linker and the attach-on-raw-graphs failure before they cost more slots.
+1. **Distrust anything measured on videos the models were trained on.** Flip-TTA and the fine-tuned linker both
+   looked good in-sample and were only caught by the leaderboard (`X1h-flip4`, `s6`); the out-of-sample screen and
+   the by-video big test were adopted as the rule afterwards. Exploratory probes sent before that (`K1`–`K3`,
+   `X3e-r94`) were ungated.
 2. **The two boards measure different things.** The public subset has few divisions; edge-level knobs show on it,
    division work often doesn't. Decide on the big test, use the public board as a smoke test and a prior.
 3. **Report per embryo.** `6bba` holds 85 % of GT edges; a pooled gain can hide a `44b6` loss (this is what the

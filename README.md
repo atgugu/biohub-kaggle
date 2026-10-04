@@ -4,7 +4,7 @@
 
 **Recovering cell lineages from 3D light-sheet embryo movies — with a division-first post-processing stack that ranks, attaches and vetoes mitoses.**
 
-*A learned candidate ranker adds the missing second daughter to dividing cells; a TripletNet-aware veto removes the forks that aren't real. Every change was gated on an honest, by-video out-of-fold test over 195 training videos.*
+*A learned candidate ranker adds the missing second daughter to dividing cells; a TripletNet-aware veto removes the forks that aren't real. The final candidates were gated on an honest, by-video out-of-fold test over 195 training videos.*
 
 [![result](https://img.shields.io/badge/Biohub_Cell_Tracking-%F0%9F%A5%88_Silver_medal_%C2%B7_68th_of_3,950-c0c0c0?style=flat-square)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development/leaderboard)
 [![private](https://img.shields.io/badge/private_LB-0.93206-eb6834?style=flat-square)](#results)
@@ -18,7 +18,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/public_vs_private_dark.png">
-  <img alt="Public and private leaderboard score of all 40 submissions, rising from 0.946 / 0.913 to 0.961 / 0.932"
+  <img alt="Public and private leaderboard score of 39 of the 40 submissions (one raw-ILP outlier omitted), rising from 0.946 / 0.913 to 0.961 / 0.932"
        src="docs/assets/public_vs_private_light.png" width="820">
 </picture>
 
@@ -38,7 +38,7 @@ asks for the full **3D + time lineage** of cells in developing embryos: every ce
 100-frame light-sheet volume (64 × 256 × 256 voxels, 1.625 × 0.406 × 0.406 µm), the links between consecutive
 frames, and the **divisions** (one node at `t` linked to two at `t+1`). Ground truth is *sparse* — only
 a median of ~0.8 % of cells in `44b6` videos and ~10 % in `6bba` videos are annotated — and the leaderboard re-runs the
-notebook on a hidden set of unseen embryos.
+notebook on a hidden set of unseen videos.
 
 ```
 score = adjusted_edge_Jaccard + 0.1 · division_Jaccard
@@ -67,8 +67,8 @@ flowchart TD
     F --> R[LightGBM ranker ×3 seeds<br/>top-10 per video, score ≥ 0.5]
     R --> A[attach<br/>add p→c, rewire or adopt orphan]
     A --> FK[fork veto<br/>LightGBM on fork geometry + DivNet folds<br/>+ γ · TripletNet logit]
-    FK -->|P &lt; 0.1| D[drop edge to farther daughter]
-    FK -->|else| K[keep fork]
+    FK -->|drop if P below 0.1| D[drop edge to farther daughter]
+    FK -->|keep| K[keep fork]
     D --> O[final submission.csv]
     K --> O
 ```
@@ -121,12 +121,14 @@ Two things the table hides:
 
 ### Validation: the 195-video big test
 
-Public notebooks' weights were trained on the training videos, so any evaluation on them is in-sample. Every
-change here was therefore scored on **all 195 non-placeholder training videos**, with all learned components
-(rankers, DivNets, TripletNet, veto) trained **5-fold by video** and scored with the host's official metric, in
-two brackets: *out-of-sample* linker features (a linker that never saw that embryo) and *in-sample* ones.
-A change had to win in both and in both embryo families (`44b6`, `6bba`) before it earned a submission slot.
-Details: [`docs/SOLUTION.md`](docs/SOLUTION.md#validation).
+Public notebooks' weights were trained on the training videos, so any evaluation on them is in-sample. From
+27 Sep on, candidates were therefore scored on **all 195 non-placeholder training videos** (earlier decisions used
+smaller held-out sets), with every learned component (rankers, DivNets, TripletNet, veto) trained **5-fold by
+video** and scored with the host's official metric, in two brackets: *out-of-sample* linker features (a linker
+that never saw that embryo) and *in-sample* ones. Final candidates had to win in both brackets and in both embryo
+families (`44b6`, `6bba`); a few exploratory probes (view-policy bets, a readmission probe) went out ungated and
+are marked as such in [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md).
+Details: [`docs/SOLUTION.md`](docs/SOLUTION.md#3-validation).
 
 ## Repository layout
 
@@ -174,7 +176,8 @@ stage fails or runs out of time, the notebook falls back to the last good graph.
 
 This solution stands on community work, all public on Kaggle: the
 [`biohub-x138`](https://www.kaggle.com/code/anvithpothula/biohub-x138) base notebook (cells 0–10 of the submitted
-notebook are that notebook, with minor runtime guards); **pilkwang**'s tracking support pack, temporal U-Net seed
+notebook are that notebook, with minor runtime guards, and remain under their author's terms; the MIT licence
+covers the code written for this repository); **pilkwang**'s tracking support pack, temporal U-Net seed
 model and DeepCenter prior; **giorgosi**'s DivNet v2 checkpoint; and the competition host's baseline and metric
 code ([`royerlab/kaggle-cell-tracking-competition`](https://github.com/royerlab/kaggle-cell-tracking-competition)).
 The attach and veto stages, DivNet v3, DaughterNet, TripletNet, the coordinate-refinement head, and the
