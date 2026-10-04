@@ -1,0 +1,41 @@
+n,submitted_utc,name,public,private,description
+1,2026-09-21 16:35,biohub-d1-s2-valoff,0.9461,0.91275,biohub-d1-s2-valoff
+2,2026-09-21 17:06,biohub-d1-s3-valoff-det096,0.94635,0.91392,biohub-d1-s3-valoff-det096
+3,2026-09-21 17:32,biohub-d1-s4-valoff-sew020,0.94606,0.91242,biohub-d1-s4-valoff-sew020
+4,2026-09-21 17:47,biohub-d1-s1-base,0.9461,0.91275,biohub-d1-s1-base
+5,2026-09-21 17:59,biohub-d1-s5-valoff-det096-sew020-dc020,0.94663,0.91536,biohub-d1-s5-valoff-det096-sew020-dc020
+6,2026-09-22 06:50,biohub-d2-s7-relrank,0.9461,0.91275,biohub-d2-s7-relrank
+7,2026-09-22 08:11,biohub-d2-s6-ftlinker,0.94301,0.90841,biohub-d2-s6-ftlinker
+8,2026-09-22 08:11,biohub-d2-s8-ftlinker-relrank,0.94301,0.90841,biohub-d2-s8-ftlinker-relrank
+9,2026-09-22 18:11,biohub-d2-s11-divattach,0.9442,0.91492,biohub-d2-s11-divattach
+10,2026-09-22 20:15,biohub-d2-r2-geofusion-divattach,0.94543,0.91731,biohub-d2-r2-geofusion-divattach
+11,2026-09-23 06:12,biohub-d2-r1-geofusion,0.94731,0.9182,biohub-d2-r1-geofusion (rebase reference)
+12,2026-09-23 10:11,biohub-d3-r4-geofusion-veto,0.94923,0.92044,biohub-d3-r4-geofusion-veto (R1 + fork veto 0.05)
+13,2026-09-23 22:27,biohub-d3-r3-geofusion-div2,0.9495,0.92135,"biohub-d3-r3-geofusion-div2 (R1 + attach v2: ranker B gio+linker, top-10 thr 0.5) — attach-v2 transfer test, expiring slot"
+14,2026-09-23 22:49,biohub-d3-r5-geofusion-ensveto,0.94684,0.92314,biohub-d3-r5-geofusion-ensveto
+15,2026-09-23 22:51,biohub-d3-r6-geofusion-attach-ensveto,0.94729,0.92457,biohub-d3-r6-geofusion-attach-ensveto
+16,2026-09-24 00:01,biohub-d3-r8-geofusion-attach-ensveto010,0.94729,0.92457,biohub-d3-r8-geofusion-attach-ensveto010
+17,2026-09-24 00:01,biohub-d2-s10-rawilp,0.89708,0.87975,biohub-d2-s10-rawilp
+18,2026-09-24 18:32,X1h,0.9538,0.92604,X1h: x138 + own V1284 head + R4 veto 0.05 (repair deadline 8.5 h)
+19,2026-09-24 18:32,R9,0.94923,0.92044,"R9: R1 geofusion + attach v2 (ranker B, top-10 thr 0.5) + R4 veto 0.05"
+20,2026-09-24 19:45,X3,0.9538,0.92604,"X3: x138 + own V1284 head + attach v2 (x138-trained ranker, top-10, thr 0.3) + R4 veto 0.05"
+21,2026-09-26 08:19,X1h-flip4,0.9495,0.91846,"X1h-flip4: X1h (x138 + own V1284 head + R4 veto 0.05, repair 8.5 h) + flip-only xy TTA (rot90/rot270/transpose views -> flips); local +0.0053 (48) / +0.0114 (block 0)"
+22,2026-09-26 19:32,X3c-8view,0.9538,0.92604,"X3c-8view: X1h (x138 8 views + own V1284 head + R4 veto 0.05, repair 8.5 h) + attach v2 with pooled honest ranker ranker_all_u3_hn (thr 0.3, k 10)"
+23,2026-09-26 20:54,K1 bet,0.94962,0.92366,K1 bet: X1h + D8-complete TTA (anti-transpose replaces duplicate flip-x view) + R4 veto 0.05
+24,2026-09-26 20:56,K2 bet,0.9538,0.92791,"K2 bet: X1h + z-flip TTA (4 z-flipped views, 12 total) gated to first 4 h, repair deadline 10 h + R4 veto 0.05"
+25,2026-09-26 21:11,K3 bet,0.94962,0.92574,"K3 bet: X1h + D8-complete + z-flip TTA (12 views) gated to first 4 h, repair deadline 10 h + R4 veto 0.05"
+26,2026-09-27 17:28,X3d v2,0.95481,0.92773,"X3d v2: X1h + attach with DivNet v3 (hi-res, all-data s0, 4-view) + 3-seed v3 ranker avg, thr 0.3, 2-GPU sharded attach (fp16), R4 veto 0.05; OOS +0.0055 vs X1h"
+27,2026-09-27 18:15,X3d-t50,0.95655,0.93141,"X3d-t50: X1h + attach DivNet v3 (all-data s0, 4-view) + 3-seed v3 ranker avg, thr 0.5, 2-GPU attach (fp16), R4 veto 0.05; OOS +0.0083 / in-sample +0.0110 vs X1h"
+28,2026-09-27 18:25,X3e-t50,0.95834,0.93185,"X3e-t50: X1h + attach DivNet v3 (s0) + DaughterNet (dn_c, dn_c1) + 3-seed ranker avg, thr 0.5, 2-GPU attach (fp16), R4 veto 0.05; OOS +0.0078 / in-sample +0.0139 vs X1h"
+29,2026-09-27 18:55,X3e-t45,0.95834,0.93143,"X3e-t45: X3e (DivNet v3 s0 + DaughterNet + 3-seed ranker avg, 2-GPU attach, R4 veto) at attach thr 0.45 (threshold-plateau hedge); OOS +0.0078 / in-sample +0.0133 vs X1h"
+30,2026-09-27 19:32,X3f-ensdn-t50,0.95335,0.93166,"X3f-ensdn-t50: X1h + attach with 3-seed DivNet v3 ensemble + DaughterNet + 3-seed ranker avg, thr 0.5, 2-GPU attach, R4 veto; in-sample best (+0.0159), OOS +0.0056 vs X1h (hedge)"
+31,2026-09-28 08:32,X3e-safe,0.95834,0.93185,"X3e-safe: X3e-t50 (DivNet v3 + DaughterNet + 3-seed ranker, thr 0.5, 2-GPU attach, R4 veto) + per-video part files (killed shard keeps finished videos) + attach budget 10.8 h / veto 11.5 h"
+32,2026-09-28 09:08,X3e-v10,0.95643,0.93064,"X3e-v10: X3e-safe (v3 + DaughterNet + 3-seed ranker, thr 0.5, 2-GPU attach, part files, 10.8 h budget) with R4 veto thr 0.1 (big test +0.0006 OOS / +0.0011 IS vs veto 0.05; costs 44b6)"
+33,2026-09-28 16:23,X3e-r94 probe,0.95656,0.93204,"X3e-r94 probe: X3e-v10 (safe, veto 0.1) + readmission min score 0.94 (was 0.965; ~1.8x readmitted nodes). Read as pair vs X3e-v10"
+34,2026-09-28 17:20,X3h,0.9552,0.92919,"X3h: X3e-safe + wide ranker ensemble (base s0-2, deep, shallow, nolk, per-pop x3, logistic) + TripletNet blend (s0-2 avg, top-200, alpha 1) @0.7 + veto 0.1; big test +0.0096 OOS / +0.0134 IS vs X1h"
+35,2026-09-28 22:12,X3h-tv,0.96034,0.93095,"X3h-tv: X3h (wide ranker ensemble + 3-seed TripletNet blend @0.7, veto 0.1) + TripletNet-aware fork veto (gamma 0.5; recovers 44b6); big test +0.0103 OOS / +0.0139 IS vs X1h"
+36,2026-09-29 00:03,X3h-tv5,0.95912,0.93082,"X3h-tv5: wide ranker ensemble + 5-seed TripletNet blend @0.7 + TripletNet-aware veto (gamma 0.5, veto 0.1); big test +0.0113 OOS / +0.0135 IS vs X1h"
+37,2026-09-29 00:37,X3h-tv5-v05,0.95979,0.93045,"X3h-tv5-v05: X3h-tv5 with veto thr 0.05 (TripletNet veto kept, gamma 0.5) - public test of veto 0.1 vs 0.05; big test -0.0012/-0.0014 vs tv5"
+38,2026-09-29 04:08,X3e-tv,0.96086,0.93206,"X3e-tv: X3e-safe + TripletNet-aware veto (gamma 1, veto 0.1); big test +0.0011 OOS / +0.0025 IS vs X3e-safe, 44b6 protected"
+39,2026-09-29 05:36,X3e-tvb,0.95986,0.93137,"X3e-tvb: X3e ranker (3 seeds, no wide) + 5-seed TripletNet blend @0.8 + TripletNet veto (gamma 1, 0.1); big test 0.9415/0.9451 (X3h-tv5 0.9429/0.9451)"
+40,2026-09-29 14:11,X3h-tv5-t06,0.95912,0.93116,X3h-tv5-t06: X3h-tv5 with attach thr 0.6 (wide + 5-seed TripletNet blend + TripletNet veto g0.5 @0.1); big test 0.9428/0.9454 (tv5 0.9429/0.9451)

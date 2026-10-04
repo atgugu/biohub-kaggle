@@ -1,0 +1,10 @@
+# inference / research scripts (versions as pinned by the Kaggle support pack)
+numpy
+scipy
+polars
+lightgbm
+torch
+zarr>=3.0.10,<4
+tracksdata
+geff
+matplotlib   # docs/make_plots.py only
